@@ -6,15 +6,18 @@
 	
 	<window width="800" height="600" if="desktop" />
 	<window width="0" height="0" if="html5" />
-	
+	<set name="ISF_ADS_LOAD_TIMEOUT" value="1" />
+	<set name="ISF_ADS_LOAD_TIMEOUT_ERROR" value="2" />
+	<set name="ISF_ADS_FIRST_INTERSTITIAL_DENY_TIME" value="0" />
+	<set name="ISF_ADS_INTERSTITIAL_DENY_TIME" value="0" />
+	<set name="ISF_VERBOSE_LOG" />
 	<source path="Source" />
-	
+	<haxelib name="hxsignal" />
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
-		
+	<haxelib name="extension-ads" />
 	<assets path="Assets/fonts" rename="fonts" include="*.ttf" />
 	<assets path="Assets/images" rename="images" include="*" exclude="icon.svg" />
-	
 	<icon path="Assets/images/icon.svg" />
 	
 	<set name="use-mp3" if="web" unless="emscripten" />

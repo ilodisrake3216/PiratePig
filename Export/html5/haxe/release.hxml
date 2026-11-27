@@ -1,4 +1,6 @@
 -main ApplicationMain 
+-cp D:/haxe/haxe/lib/hxsignal/0,9,3/src
+-D hxsignal=0.9.3
 --macro openfl.utils._internal.ExtraParamsMacro.include()
 -cp D:/haxe/haxe/lib/openfl/9,5,2/src
 -D openfl=9.5.2
@@ -8,7 +10,11 @@
 -D lime=8.3.2
 -cp D:/haxe/haxe/lib/actuate/1,9,0/src
 -D actuate=1.9.0
+-cp D:/haxe/haxe/lib/extension-ads/git
+-D extension-ads=1.0.0
 -cp Source
+-D ISF_ADS_FIRST_INTERSTITIAL_DENY_TIME=60
+-D ISF_ADS_INTERSTITIAL_DENY_TIME=45
 -D lime-threads
 -D tools=8.3.2
 -D lime-canvas
@@ -19,11 +25,11 @@
 -D lime-dom
 -D lime-howlerjs
 -D lime-html5
+-D ISF_ADS_LOAD_TIMEOUT=1
+-D ISF_ADS_LOAD_TIMEOUT_ERROR=1
 -D html5
 -D web
 --remap flash:openfl
---connect
-6000
 -js Export/html5/bin/PiratePig.js
 -cp Export/html5/haxe
 -D html5

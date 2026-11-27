@@ -913,7 +913,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "8";
+	app.meta.h["build"] = "1";
 	app.meta.h["company"] = "OpenFL";
 	app.meta.h["file"] = "PiratePig";
 	app.meta.h["name"] = "Pirate Pig";
@@ -1234,57 +1234,6 @@ openfl_display_IBitmapDrawable.__isInterface__ = true;
 openfl_display_IBitmapDrawable.prototype = {
 	__class__: openfl_display_IBitmapDrawable
 };
-var haxe_IMap = function() { };
-$hxClasses["haxe.IMap"] = haxe_IMap;
-haxe_IMap.__name__ = "haxe.IMap";
-haxe_IMap.__isInterface__ = true;
-haxe_IMap.prototype = {
-	__class__: haxe_IMap
-};
-var haxe_ds_StringMap = function() {
-	this.h = Object.create(null);
-};
-$hxClasses["haxe.ds.StringMap"] = haxe_ds_StringMap;
-haxe_ds_StringMap.__name__ = "haxe.ds.StringMap";
-haxe_ds_StringMap.__interfaces__ = [haxe_IMap];
-haxe_ds_StringMap.stringify = function(h) {
-	var s = "[";
-	var first = true;
-	for (var key in h) {
-		if (first) first = false; else s += ',';
-		s += key + ' => ' + Std.string(h[key]);
-	}
-	return s + "]";
-};
-haxe_ds_StringMap.prototype = {
-	exists: function(key) {
-		return Object.prototype.hasOwnProperty.call(this.h,key);
-	}
-	,get: function(key) {
-		return this.h[key];
-	}
-	,set: function(key,value) {
-		this.h[key] = value;
-	}
-	,remove: function(key) {
-		if(Object.prototype.hasOwnProperty.call(this.h,key)) {
-			delete(this.h[key]);
-			return true;
-		} else {
-			return false;
-		}
-	}
-	,keys: function() {
-		return new haxe_ds__$StringMap_StringMapKeyIterator(this.h);
-	}
-	,iterator: function() {
-		return new haxe_ds__$StringMap_StringMapValueIterator(this.h);
-	}
-	,keyValueIterator: function() {
-		return new haxe_ds__$StringMap_StringMapKeyValueIterator(this.h);
-	}
-	,__class__: haxe_ds_StringMap
-};
 var openfl_Vector = {};
 openfl_Vector.__properties__ = {set_length:"set_length",get_length:"get_length",set_fixed:"set_fixed",get_fixed:"get_fixed"};
 openfl_Vector.concat = function(this1,vec) {
@@ -1460,212 +1409,6 @@ openfl_Vector.get_length = function(this1) {
 };
 openfl_Vector.set_length = function(this1,value) {
 	return this1.set_length(value);
-};
-var openfl__$Vector_IVector = function() { };
-$hxClasses["openfl._Vector.IVector"] = openfl__$Vector_IVector;
-openfl__$Vector_IVector.__name__ = "openfl._Vector.IVector";
-openfl__$Vector_IVector.__isInterface__ = true;
-openfl__$Vector_IVector.prototype = {
-	__class__: openfl__$Vector_IVector
-	,__properties__: {set_length:"set_length",get_length:"get_length"}
-};
-var openfl__$Vector_ObjectVector = function(length,fixed,array,forceCopy) {
-	if(forceCopy == null) {
-		forceCopy = false;
-	}
-	if(fixed == null) {
-		fixed = false;
-	}
-	if(length == null) {
-		length = 0;
-	}
-	if(forceCopy) {
-		this.__array = [];
-		if(array != null) {
-			var _g = 0;
-			var _g1 = array.length;
-			while(_g < _g1) {
-				var i = _g++;
-				this.__array[i] = array[i];
-			}
-		}
-	} else {
-		if(array == null) {
-			array = [];
-		}
-		this.__array = array;
-	}
-	if(length > 0) {
-		this.set_length(length);
-	}
-	this.fixed = fixed;
-};
-$hxClasses["openfl._Vector.ObjectVector"] = openfl__$Vector_ObjectVector;
-openfl__$Vector_ObjectVector.__name__ = "openfl._Vector.ObjectVector";
-openfl__$Vector_ObjectVector.__interfaces__ = [openfl__$Vector_IVector];
-openfl__$Vector_ObjectVector.prototype = {
-	concat: function(a) {
-		if(a == null) {
-			return new openfl__$Vector_ObjectVector(0,false,this.__array.slice());
-		} else {
-			var other = a;
-			if(other.__array.length > 0) {
-				return new openfl__$Vector_ObjectVector(0,false,this.__array.concat(other.__array));
-			} else {
-				return new openfl__$Vector_ObjectVector(0,false,this.__array.slice());
-			}
-		}
-	}
-	,copy: function() {
-		return new openfl__$Vector_ObjectVector(0,this.fixed,this.__array.slice());
-	}
-	,filter: function(callback) {
-		var tmp = this.fixed;
-		var _g = [];
-		var _g1 = 0;
-		var _g2 = this.__array;
-		while(_g1 < _g2.length) {
-			var v = _g2[_g1];
-			++_g1;
-			if(callback(v)) {
-				_g.push(v);
-			}
-		}
-		return new openfl__$Vector_ObjectVector(0,tmp,_g);
-	}
-	,get: function(index) {
-		return this.__array[index];
-	}
-	,indexOf: function(x,from) {
-		if(from == null) {
-			from = 0;
-		}
-		var _g = from;
-		var _g1 = this.__array.length;
-		while(_g < _g1) {
-			var i = _g++;
-			if(this.__array[i] == x) {
-				return i;
-			}
-		}
-		return -1;
-	}
-	,insertAt: function(index,element) {
-		if(!this.fixed || index < this.__array.length) {
-			this.__array.splice(index,0,element);
-		}
-	}
-	,iterator: function() {
-		return new haxe_iterators_ArrayIterator(this.__array);
-	}
-	,join: function(sep) {
-		if(sep == null) {
-			sep = ",";
-		}
-		return this.__array.join(sep);
-	}
-	,lastIndexOf: function(x,from) {
-		var i = from == null || from >= this.__array.length ? this.__array.length - 1 : from;
-		while(i >= 0) {
-			if(this.__array[i] == x) {
-				return i;
-			}
-			--i;
-		}
-		return -1;
-	}
-	,pop: function() {
-		if(!this.fixed) {
-			return this.__array.pop();
-		} else {
-			return null;
-		}
-	}
-	,push: function(x) {
-		if(!this.fixed) {
-			return this.__array.push(x);
-		} else {
-			return this.__array.length;
-		}
-	}
-	,removeAt: function(index) {
-		if(!this.fixed || index < this.__array.length) {
-			return this.__array.splice(index,1)[0];
-		}
-		return null;
-	}
-	,reverse: function() {
-		this.__array.reverse();
-		return this;
-	}
-	,set: function(index,value) {
-		if(!this.fixed || index < this.__array.length) {
-			return this.__array[index] = value;
-		} else {
-			return value;
-		}
-	}
-	,shift: function() {
-		if(!this.fixed) {
-			return this.__array.shift();
-		} else {
-			return null;
-		}
-	}
-	,slice: function(startIndex,endIndex) {
-		if(startIndex == null) {
-			startIndex = 0;
-		}
-		if(endIndex == null) {
-			endIndex = 16777215;
-		}
-		return new openfl__$Vector_ObjectVector(0,false,this.__array.slice(startIndex,endIndex));
-	}
-	,sort: function(f) {
-		this.__array.sort(f);
-	}
-	,splice: function(pos,len) {
-		return new openfl__$Vector_ObjectVector(0,false,this.__array.splice(pos,len));
-	}
-	,toJSON: function() {
-		return this.__array;
-	}
-	,toString: function() {
-		if(this.__array != null) {
-			return this.__array.toString();
-		} else {
-			return null;
-		}
-	}
-	,unshift: function(x) {
-		if(!this.fixed) {
-			this.__array.unshift(x);
-		}
-	}
-	,get_length: function() {
-		return this.__array.length;
-	}
-	,set_length: function(value) {
-		if(!this.fixed) {
-			var currentLength = this.__array.length;
-			if(value < 0) {
-				value = 0;
-			}
-			if(value > currentLength) {
-				var _g = currentLength;
-				var _g1 = value;
-				while(_g < _g1) {
-					var i = _g++;
-					this.__array.push(null);
-				}
-			} else {
-				while(this.__array.length > value) this.__array.pop();
-			}
-		}
-		return this.__array.length;
-	}
-	,__class__: openfl__$Vector_ObjectVector
-	,__properties__: {set_length:"set_length",get_length:"get_length"}
 };
 var lime_utils_ObjectPool = function(create,clean,size) {
 	this.__pool = new haxe_ds_ObjectMap();
@@ -1876,6 +1619,13 @@ lime_utils_ObjectPool.prototype = {
 	}
 	,__class__: lime_utils_ObjectPool
 	,__properties__: {set_size:"set_size",get_size:"get_size"}
+};
+var haxe_IMap = function() { };
+$hxClasses["haxe.IMap"] = haxe_IMap;
+haxe_IMap.__name__ = "haxe.IMap";
+haxe_IMap.__isInterface__ = true;
+haxe_IMap.prototype = {
+	__class__: haxe_IMap
 };
 var haxe_ds_ObjectMap = function() {
 	this.h = { __keys__ : { }};
@@ -3718,17 +3468,56 @@ openfl_display_Sprite.prototype = $extend(openfl_display_DisplayObjectContainer.
 	,__properties__: $extend(openfl_display_DisplayObjectContainer.prototype.__properties__,{get_graphics:"get_graphics",set_buttonMode:"set_buttonMode",get_buttonMode:"get_buttonMode"})
 });
 var piratepig_PiratePig = function() {
+	this.lastTime = 0;
+	this.rewardedId = -1;
+	this.interstitialId = -1;
 	openfl_display_Sprite.call(this);
 	this.initialize();
 	this.construct();
 	this.resize(this.stage.stageWidth,this.stage.stageHeight);
 	this.stage.addEventListener("resize",$bind(this,this.stage_onResize));
+	var fakeAds = new extension_ads_FakeAds();
+	fakeAds.allow_ = true;
+	fakeAds.reward_ = true;
+	this.interstitialId = fakeAds.AddInterstitial();
+	this.rewardedId = fakeAds.AddRewarded();
+	this.ads = fakeAds;
+	this.ads.set_on_inited(function(ok) {
+		haxe_Log.trace("on_inited: " + (ok == null ? "null" : "" + ok),{ fileName : "Source/piratepig/PiratePig.hx", lineNumber : 39, className : "piratepig.PiratePig", methodName : "new"});
+	});
+	this.ads.set_on_show(function(id,show) {
+		haxe_Log.trace("on_show -> id: " + id + ", show: " + (show == null ? "null" : "" + show),{ fileName : "Source/piratepig/PiratePig.hx", lineNumber : 42, className : "piratepig.PiratePig", methodName : "new"});
+	});
+	this.ads.set_on_reward(function(id) {
+		haxe_Log.trace("on_reward -> id: " + id,{ fileName : "Source/piratepig/PiratePig.hx", lineNumber : 46, className : "piratepig.PiratePig", methodName : "new"});
+	});
+	this.ads.set_on_error(function(id,err) {
+		haxe_Log.trace("on_error -> id: " + id + ", err: " + err,{ fileName : "Source/piratepig/PiratePig.hx", lineNumber : 50, className : "piratepig.PiratePig", methodName : "new"});
+	});
+	fakeAds.Init();
+	this.lastTime = openfl_Lib.getTimer();
+	this.addEventListener("enterFrame",$bind(this,this.onEnterFrame));
+	this.stage.addEventListener("click",$bind(this,this.onStageClick));
 };
 $hxClasses["piratepig.PiratePig"] = piratepig_PiratePig;
 piratepig_PiratePig.__name__ = "piratepig.PiratePig";
 piratepig_PiratePig.__super__ = openfl_display_Sprite;
 piratepig_PiratePig.prototype = $extend(openfl_display_Sprite.prototype,{
-	construct: function() {
+	onStageClick: function(e) {
+		if(this.ads != null && this.ads.IsAdReady(this.rewardedId)) {
+			haxe_Log.trace("Показываем рекламу id = " + this.rewardedId,{ fileName : "Source/piratepig/PiratePig.hx", lineNumber : 59, className : "piratepig.PiratePig", methodName : "onStageClick"});
+			this.ads.ShowAd(this.rewardedId);
+		}
+	}
+	,onEnterFrame: function(event) {
+		var now = openfl_Lib.getTimer();
+		var dt = (now - this.lastTime) / 1000.0;
+		this.lastTime = now;
+		if(this.ads != null) {
+			this.ads.Process(dt);
+		}
+	}
+	,construct: function() {
 		this.Footer.smoothing = true;
 		this.addChild(this.Background);
 		this.addChild(this.Footer);
@@ -4722,6 +4511,374 @@ Xml.prototype = {
 	}
 	,__class__: Xml
 };
+var extension_ads_AdsBase = function() {
+	this.ads_ = [];
+	this.on_reward_ = null;
+	this.on_error_ = null;
+	this.on_show_ = null;
+	this.on_inited_ = null;
+	this.interstitial_deny_time_ = parseFloat("45");
+	this.load_timeout_ = parseFloat("1");
+	var tmp;
+	var tmp1;
+	var tmp2;
+	var f = extension_ads_AdsBase.kAdsLoadTimeout;
+	if(!isNaN(f)) {
+		var f = extension_ads_AdsBase.kAdsLoadTimeoutError;
+		tmp2 = isNaN(f);
+	} else {
+		tmp2 = true;
+	}
+	if(!tmp2) {
+		var f = extension_ads_AdsBase.kAdsFirstInterstitialDenyTime;
+		tmp1 = isNaN(f);
+	} else {
+		tmp1 = true;
+	}
+	if(!tmp1) {
+		var f = extension_ads_AdsBase.kAdsInterstitialDenyTime;
+		tmp = isNaN(f);
+	} else {
+		tmp = true;
+	}
+	if(tmp) {
+		throw haxe_Exception.thrown("Don't forget to add constants to project file:\n  ISF_ADS_LOAD_TIMEOUT\n  ISF_ADS_LOAD_TIMEOUT_ERROR\n  ISF_ADS_FIRST_INTERSTITIAL_DENY_TIME\n  ISF_ADS_INTERSTITIAL_DENY_TIME");
+	}
+};
+$hxClasses["extension.ads.AdsBase"] = extension_ads_AdsBase;
+extension_ads_AdsBase.__name__ = "extension.ads.AdsBase";
+extension_ads_AdsBase.prototype = {
+	UpdateInterstitialDenyTime: function(v) {
+		var _g = 0;
+		var _g1 = this.ads_;
+		while(_g < _g1.length) {
+			var ad = _g1[_g];
+			++_g;
+			ad.set_interstitial_deny_time(v);
+		}
+	}
+	,CallOnInited: function(ok) {
+		if(this.on_inited_ == null) {
+			return;
+		}
+		this.on_inited_(ok);
+	}
+	,CallOnError: function(ad_id,code,message) {
+		if(message == null) {
+			message = "";
+		}
+		if(code == null) {
+			code = 0;
+		}
+		if(this.on_error_ == null) {
+			return;
+		}
+		this.on_error_(ad_id,"{\"code\":" + code + ",\"msg\":\"" + message + "\"}");
+	}
+	,CallOnShow: function(ad_id,show) {
+		if(this.on_show_ == null) {
+			return;
+		}
+		this.on_show_(ad_id,show);
+	}
+	,CallOnReward: function(ad_id) {
+		if(this.on_reward_ == null) {
+			return;
+		}
+		this.on_reward_(ad_id);
+	}
+	,AddAdBase: function(ad) {
+		ad.set_interstitial_deny_time(parseFloat("60"));
+		ad.set_id(this.ads_.length);
+		this.ads_.push(ad);
+		return ad;
+	}
+	,ProcessLoad: function(time_step) {
+		var _g = 0;
+		var _g1 = this.ads_.length;
+		while(_g < _g1) {
+			var i = _g++;
+			var a = this.ads_[i];
+			if(a.interstitial_deny_time() > 0) {
+				a.set_interstitial_deny_time(a.interstitial_deny_time() - time_step);
+			}
+			if(a.load_timeout() > 0) {
+				a.set_load_timeout(a.load_timeout() - time_step);
+			}
+			if(a.loaded() || a.loading()) {
+				continue;
+			}
+			if(a.load_timeout() <= 0) {
+				a.set_loading(true);
+				this.Load(i);
+			}
+		}
+	}
+	,Load: function(idx) {
+		throw haxe_Exception.thrown("AdsBase::Load must be overloaded!");
+	}
+	,Loaded: function(idx) {
+		this.ads_[idx].set_loaded(true).set_loading(false).set_load_timeout(0);
+	}
+	,ResetAfterSuccess: function(idx) {
+		this.ads_[idx].set_loaded(false).set_loading(false).set_load_timeout(extension_ads_AdsBase.kAdsLoadTimeout).set_interstitial_deny_time(this.interstitial_deny_time_);
+	}
+	,ResetAfterError: function(idx) {
+		this.ads_[idx].set_loaded(false).set_loading(false).set_load_timeout(extension_ads_AdsBase.kAdsLoadTimeoutError);
+	}
+	,IsAdAllowed: function(idx) {
+		var a = this.ads_[idx];
+		if(a.load_timeout() <= 0 && !a.loading() && a.loaded()) {
+			if(a.type() == extension_ads_AdType.kInterstitial) {
+				if(a.interstitial_deny_time() <= 0) {
+					return true;
+				}
+			} else {
+				return true;
+			}
+		}
+		return false;
+	}
+	,__class__: extension_ads_AdsBase
+};
+var extension_ads_AdType = $hxEnums["extension.ads.AdType"] = { __ename__:"extension.ads.AdType",__constructs__:null
+	,kNone: {_hx_name:"kNone",_hx_index:0,__enum__:"extension.ads.AdType",toString:$estr}
+	,kInterstitial: {_hx_name:"kInterstitial",_hx_index:1,__enum__:"extension.ads.AdType",toString:$estr}
+	,kRewarded: {_hx_name:"kRewarded",_hx_index:2,__enum__:"extension.ads.AdType",toString:$estr}
+	,kUnknown: {_hx_name:"kUnknown",_hx_index:3,__enum__:"extension.ads.AdType",toString:$estr}
+};
+extension_ads_AdType.__constructs__ = [extension_ads_AdType.kNone,extension_ads_AdType.kInterstitial,extension_ads_AdType.kRewarded,extension_ads_AdType.kUnknown];
+var extension_ads_AdBase = function() {
+	this.interstitial_deny_time_ = 0;
+	this.load_timeout_ = 0;
+	this.loading_ = false;
+	this.loaded_ = false;
+	this.id_ = -1;
+	this.type_ = extension_ads_AdType.kNone;
+};
+$hxClasses["extension.ads.AdBase"] = extension_ads_AdBase;
+extension_ads_AdBase.__name__ = "extension.ads.AdBase";
+extension_ads_AdBase.prototype = {
+	type: function() {
+		return this.type_;
+	}
+	,set_type: function(v) {
+		this.type_ = v;
+		return this;
+	}
+	,id: function() {
+		return this.id_;
+	}
+	,set_id: function(v) {
+		this.id_ = v;
+		return this;
+	}
+	,loaded: function() {
+		return this.loaded_;
+	}
+	,set_loaded: function(v) {
+		this.loaded_ = v;
+		return this;
+	}
+	,loading: function() {
+		return this.loading_;
+	}
+	,set_loading: function(v) {
+		this.loading_ = v;
+		return this;
+	}
+	,load_timeout: function() {
+		return this.load_timeout_;
+	}
+	,set_load_timeout: function(v) {
+		this.load_timeout_ = v;
+		return this;
+	}
+	,interstitial_deny_time: function() {
+		return this.interstitial_deny_time_;
+	}
+	,set_interstitial_deny_time: function(v) {
+		this.interstitial_deny_time_ = v;
+		return this;
+	}
+	,__class__: extension_ads_AdBase
+};
+var extension_ads_AdsI = function() { };
+$hxClasses["extension.ads.AdsI"] = extension_ads_AdsI;
+extension_ads_AdsI.__name__ = "extension.ads.AdsI";
+extension_ads_AdsI.__isInterface__ = true;
+extension_ads_AdsI.prototype = {
+	__class__: extension_ads_AdsI
+};
+var extension_ads_FakeAds = function() {
+	this.inited_ = false;
+	this.reward_ = false;
+	this.allow_ = false;
+	this.kRewardedIdx = -1;
+	this.kInterstitialIdx = -1;
+	extension_ads_AdsBase.call(this);
+	this.kInterstitialIdx = this.AddAdBase(new extension_ads_Ad()).set_type(extension_ads_AdType.kInterstitial).id();
+	this.kRewardedIdx = this.AddAdBase(new extension_ads_Ad()).set_type(extension_ads_AdType.kRewarded).id();
+};
+$hxClasses["extension.ads.FakeAds"] = extension_ads_FakeAds;
+extension_ads_FakeAds.__name__ = "extension.ads.FakeAds";
+extension_ads_FakeAds.__interfaces__ = [extension_ads_AdsI];
+extension_ads_FakeAds.__super__ = extension_ads_AdsBase;
+extension_ads_FakeAds.prototype = $extend(extension_ads_AdsBase.prototype,{
+	Init: function() {
+		this.inited_ = true;
+		this.CallOnInited(true);
+		return this;
+	}
+	,AddInterstitial: function() {
+		return this.kInterstitialIdx;
+	}
+	,AddRewarded: function() {
+		return this.kRewardedIdx;
+	}
+	,allow: function() {
+		return this.allow_;
+	}
+	,set_allow: function(v) {
+		this.allow_ = v;
+		return this;
+	}
+	,reward: function() {
+		return this.reward_;
+	}
+	,set_reward: function(v) {
+		this.reward_ = v;
+		return this;
+	}
+	,IsInited: function() {
+		return this.inited_;
+	}
+	,IsAdReady: function(id) {
+		haxe_Log.trace("FR 1 " + id,{ fileName : "extension/ads/FakeAds.hx", lineNumber : 48, className : "extension.ads.FakeAds", methodName : "IsAdReady"});
+		if(!this.allow_) {
+			return false;
+		}
+		haxe_Log.trace("FR 2",{ fileName : "extension/ads/FakeAds.hx", lineNumber : 50, className : "extension.ads.FakeAds", methodName : "IsAdReady"});
+		if(!this.IsAdAllowed(id)) {
+			return false;
+		}
+		haxe_Log.trace("FR 3",{ fileName : "extension/ads/FakeAds.hx", lineNumber : 52, className : "extension.ads.FakeAds", methodName : "IsAdReady"});
+		return true;
+	}
+	,ShowAd: function(id) {
+		var _gthis = this;
+		if(!this.allow_) {
+			return this;
+		}
+		if(!this.IsAdReady(id)) {
+			return this;
+		}
+		var ts = 5000;
+		var th = 7000;
+		if(id == this.kRewardedIdx) {
+			this.CallOnShow(id,true);
+			haxe_Timer.delay(function() {
+				if(_gthis.reward_) {
+					_gthis.CallOnReward(id);
+				}
+				_gthis.CallOnShow(id,false);
+				_gthis.ResetAfterSuccess(id);
+			},th);
+			return this;
+		}
+		haxe_Timer.delay(function() {
+			_gthis.CallOnShow(id,true);
+			haxe_Timer.delay(function() {
+				_gthis.CallOnShow(id,false);
+				_gthis.ResetAfterSuccess(id);
+			},th);
+		},ts);
+		return this;
+	}
+	,Process: function(time_step) {
+		this.ProcessLoad(time_step);
+		return this;
+	}
+	,GameLoadingStart: function() {
+		if(!this.inited_) {
+			return this;
+		}
+		return this;
+	}
+	,GameLoadingFinished: function() {
+		if(!this.inited_) {
+			return this;
+		}
+		return this;
+	}
+	,GameplayStart: function() {
+		if(!this.inited_) {
+			return this;
+		}
+		return this;
+	}
+	,GameplayStop: function() {
+		if(!this.inited_) {
+			return this;
+		}
+		return this;
+	}
+	,load_timeout: function() {
+		return this.load_timeout_;
+	}
+	,set_load_timeout: function(v) {
+		this.load_timeout_ = v;
+		return this;
+	}
+	,interstitial_deny_time: function() {
+		return this.interstitial_deny_time_;
+	}
+	,set_interstitial_deny_time: function(v) {
+		this.interstitial_deny_time_ = v;
+		return this;
+	}
+	,on_inited: function() {
+		return this.on_inited_;
+	}
+	,set_on_inited: function(v) {
+		this.on_inited_ = v;
+		return this;
+	}
+	,on_show: function() {
+		return this.on_show_;
+	}
+	,set_on_show: function(v) {
+		this.on_show_ = v;
+		return this;
+	}
+	,on_error: function() {
+		return this.on_error_;
+	}
+	,set_on_error: function(v) {
+		this.on_error_ = v;
+		return this;
+	}
+	,on_reward: function() {
+		return this.on_reward_;
+	}
+	,set_on_reward: function(v) {
+		this.on_reward_ = v;
+		return this;
+	}
+	,Load: function(idx) {
+		this.Loaded(idx);
+	}
+	,__class__: extension_ads_FakeAds
+});
+var extension_ads_Ad = function() {
+	extension_ads_AdBase.call(this);
+};
+$hxClasses["extension.ads.Ad"] = extension_ads_Ad;
+extension_ads_Ad.__name__ = "extension.ads.Ad";
+extension_ads_Ad.__super__ = extension_ads_AdBase;
+extension_ads_Ad.prototype = $extend(extension_ads_AdBase.prototype,{
+	__class__: extension_ads_Ad
+});
 var haxe_StackItem = $hxEnums["haxe.StackItem"] = { __ename__:"haxe.StackItem",__constructs__:null
 	,CFunction: {_hx_name:"CFunction",_hx_index:0,__enum__:"haxe.StackItem",toString:$estr}
 	,Module: ($_=function(m) { return {_hx_index:1,m:m,__enum__:"haxe.StackItem",toString:$estr}; },$_._hx_name="Module",$_.__params__ = ["m"],$_)
@@ -6594,6 +6751,50 @@ haxe_ds__$List_ListIterator.prototype = {
 	}
 	,__class__: haxe_ds__$List_ListIterator
 };
+var haxe_ds_StringMap = function() {
+	this.h = Object.create(null);
+};
+$hxClasses["haxe.ds.StringMap"] = haxe_ds_StringMap;
+haxe_ds_StringMap.__name__ = "haxe.ds.StringMap";
+haxe_ds_StringMap.__interfaces__ = [haxe_IMap];
+haxe_ds_StringMap.stringify = function(h) {
+	var s = "[";
+	var first = true;
+	for (var key in h) {
+		if (first) first = false; else s += ',';
+		s += key + ' => ' + Std.string(h[key]);
+	}
+	return s + "]";
+};
+haxe_ds_StringMap.prototype = {
+	exists: function(key) {
+		return Object.prototype.hasOwnProperty.call(this.h,key);
+	}
+	,get: function(key) {
+		return this.h[key];
+	}
+	,set: function(key,value) {
+		this.h[key] = value;
+	}
+	,remove: function(key) {
+		if(Object.prototype.hasOwnProperty.call(this.h,key)) {
+			delete(this.h[key]);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	,keys: function() {
+		return new haxe_ds__$StringMap_StringMapKeyIterator(this.h);
+	}
+	,iterator: function() {
+		return new haxe_ds__$StringMap_StringMapValueIterator(this.h);
+	}
+	,keyValueIterator: function() {
+		return new haxe_ds__$StringMap_StringMapKeyValueIterator(this.h);
+	}
+	,__class__: haxe_ds_StringMap
+};
 var haxe_ds__$StringMap_StringMapKeyIterator = function(h) {
 	this.h = h;
 	this.keys = Object.keys(h);
@@ -8297,6 +8498,46 @@ haxe_zip_Reader.prototype = {
 	}
 	,__class__: haxe_zip_Reader
 };
+var hxsignal_Signal = function() {
+};
+$hxClasses["hxsignal.Signal"] = hxsignal_Signal;
+hxsignal_Signal.__name__ = "hxsignal.Signal";
+hxsignal_Signal.createSignal = function() {
+};
+hxsignal_Signal.signal = function() {
+};
+hxsignal_Signal.prototype = {
+	connect: function(slot,times,groupId,at) {
+	}
+	,isConnected: function(slot) {
+		return false;
+	}
+	,block: function(slot,flag) {
+	}
+	,isBlocked: function(slot) {
+		return false;
+	}
+	,disconnect: function(slot) {
+		return false;
+	}
+	,disconnectAll: function() {
+	}
+	,disconnectGroup: function(id) {
+		return false;
+	}
+	,__class__: hxsignal_Signal
+};
+var hxsignal_ConnectionTimes = $hxEnums["hxsignal.ConnectionTimes"] = { __ename__:"hxsignal.ConnectionTimes",__constructs__:null
+	,Once: {_hx_name:"Once",_hx_index:0,__enum__:"hxsignal.ConnectionTimes",toString:$estr}
+	,Times: ($_=function(t) { return {_hx_index:1,t:t,__enum__:"hxsignal.ConnectionTimes",toString:$estr}; },$_._hx_name="Times",$_.__params__ = ["t"],$_)
+	,Forever: {_hx_name:"Forever",_hx_index:2,__enum__:"hxsignal.ConnectionTimes",toString:$estr}
+};
+hxsignal_ConnectionTimes.__constructs__ = [hxsignal_ConnectionTimes.Once,hxsignal_ConnectionTimes.Times,hxsignal_ConnectionTimes.Forever];
+var hxsignal_ConnectPosition = $hxEnums["hxsignal.ConnectPosition"] = { __ename__:"hxsignal.ConnectPosition",__constructs__:null
+	,AtBack: {_hx_name:"AtBack",_hx_index:0,__enum__:"hxsignal.ConnectPosition",toString:$estr}
+	,AtFront: {_hx_name:"AtFront",_hx_index:1,__enum__:"hxsignal.ConnectPosition",toString:$estr}
+};
+hxsignal_ConnectPosition.__constructs__ = [hxsignal_ConnectPosition.AtBack,hxsignal_ConnectPosition.AtFront];
 var js_Boot = function() { };
 $hxClasses["js.Boot"] = js_Boot;
 js_Boot.__name__ = "js.Boot";
@@ -25775,7 +26016,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 256515;
+	this.version = 711993;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
@@ -29878,51 +30119,6 @@ openfl_utils_Dictionary.fromUtilsObjectMap = function(map) {
 openfl_utils_Dictionary.fromClassMap = function(map) {
 	return map;
 };
-var openfl_utils__$Dictionary_UtilsObjectMap = function() {
-	this.map = new haxe_ds_ObjectMap();
-};
-$hxClasses["openfl.utils._Dictionary.UtilsObjectMap"] = openfl_utils__$Dictionary_UtilsObjectMap;
-openfl_utils__$Dictionary_UtilsObjectMap.__name__ = "openfl.utils._Dictionary.UtilsObjectMap";
-openfl_utils__$Dictionary_UtilsObjectMap.__interfaces__ = [haxe_IMap];
-openfl_utils__$Dictionary_UtilsObjectMap.prototype = {
-	clear: function() {
-		this.map.h = { __keys__ : { }};
-	}
-	,copy: function() {
-		var copied = new openfl_utils__$Dictionary_UtilsObjectMap();
-		var key = this.keys();
-		while(key.hasNext()) {
-			var key1 = key.next();
-			copied.set(key1,this.get(key1));
-		}
-		return copied;
-	}
-	,exists: function(key) {
-		return this.map.h.__keys__[key.__id__] != null;
-	}
-	,get: function(key) {
-		return this.map.h[key.__id__];
-	}
-	,keyValueIterator: function() {
-		return new haxe_iterators_MapKeyValueIterator(this);
-	}
-	,keys: function() {
-		return this.map.keys();
-	}
-	,iterator: function() {
-		return this.map.iterator();
-	}
-	,remove: function(key) {
-		return this.map.remove(key);
-	}
-	,set: function(key,value) {
-		this.map.set(key,value);
-	}
-	,toString: function() {
-		return this.map.toString();
-	}
-	,__class__: openfl_utils__$Dictionary_UtilsObjectMap
-};
 var openfl_Lib = function() { };
 $hxClasses["openfl.Lib"] = openfl_Lib;
 openfl_Lib.__name__ = "openfl.Lib";
@@ -30130,6 +30326,14 @@ openfl_Lib.get_current = function() {
 		openfl_utils__$internal_Lib.current = new openfl_display_MovieClip();
 	}
 	return openfl_utils__$internal_Lib.current;
+};
+var openfl__$Vector_IVector = function() { };
+$hxClasses["openfl._Vector.IVector"] = openfl__$Vector_IVector;
+openfl__$Vector_IVector.__name__ = "openfl._Vector.IVector";
+openfl__$Vector_IVector.__isInterface__ = true;
+openfl__$Vector_IVector.prototype = {
+	__class__: openfl__$Vector_IVector
+	,__properties__: {set_length:"set_length",get_length:"get_length"}
 };
 var openfl__$Vector_BoolVector = function(length,fixed,array) {
 	if(fixed == null) {
@@ -30884,6 +31088,204 @@ openfl__$Vector_IntVector.prototype = {
 		return this.__array.length;
 	}
 	,__class__: openfl__$Vector_IntVector
+	,__properties__: {set_length:"set_length",get_length:"get_length"}
+};
+var openfl__$Vector_ObjectVector = function(length,fixed,array,forceCopy) {
+	if(forceCopy == null) {
+		forceCopy = false;
+	}
+	if(fixed == null) {
+		fixed = false;
+	}
+	if(length == null) {
+		length = 0;
+	}
+	if(forceCopy) {
+		this.__array = [];
+		if(array != null) {
+			var _g = 0;
+			var _g1 = array.length;
+			while(_g < _g1) {
+				var i = _g++;
+				this.__array[i] = array[i];
+			}
+		}
+	} else {
+		if(array == null) {
+			array = [];
+		}
+		this.__array = array;
+	}
+	if(length > 0) {
+		this.set_length(length);
+	}
+	this.fixed = fixed;
+};
+$hxClasses["openfl._Vector.ObjectVector"] = openfl__$Vector_ObjectVector;
+openfl__$Vector_ObjectVector.__name__ = "openfl._Vector.ObjectVector";
+openfl__$Vector_ObjectVector.__interfaces__ = [openfl__$Vector_IVector];
+openfl__$Vector_ObjectVector.prototype = {
+	concat: function(a) {
+		if(a == null) {
+			return new openfl__$Vector_ObjectVector(0,false,this.__array.slice());
+		} else {
+			var other = a;
+			if(other.__array.length > 0) {
+				return new openfl__$Vector_ObjectVector(0,false,this.__array.concat(other.__array));
+			} else {
+				return new openfl__$Vector_ObjectVector(0,false,this.__array.slice());
+			}
+		}
+	}
+	,copy: function() {
+		return new openfl__$Vector_ObjectVector(0,this.fixed,this.__array.slice());
+	}
+	,filter: function(callback) {
+		var tmp = this.fixed;
+		var _g = [];
+		var _g1 = 0;
+		var _g2 = this.__array;
+		while(_g1 < _g2.length) {
+			var v = _g2[_g1];
+			++_g1;
+			if(callback(v)) {
+				_g.push(v);
+			}
+		}
+		return new openfl__$Vector_ObjectVector(0,tmp,_g);
+	}
+	,get: function(index) {
+		return this.__array[index];
+	}
+	,indexOf: function(x,from) {
+		if(from == null) {
+			from = 0;
+		}
+		var _g = from;
+		var _g1 = this.__array.length;
+		while(_g < _g1) {
+			var i = _g++;
+			if(this.__array[i] == x) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	,insertAt: function(index,element) {
+		if(!this.fixed || index < this.__array.length) {
+			this.__array.splice(index,0,element);
+		}
+	}
+	,iterator: function() {
+		return new haxe_iterators_ArrayIterator(this.__array);
+	}
+	,join: function(sep) {
+		if(sep == null) {
+			sep = ",";
+		}
+		return this.__array.join(sep);
+	}
+	,lastIndexOf: function(x,from) {
+		var i = from == null || from >= this.__array.length ? this.__array.length - 1 : from;
+		while(i >= 0) {
+			if(this.__array[i] == x) {
+				return i;
+			}
+			--i;
+		}
+		return -1;
+	}
+	,pop: function() {
+		if(!this.fixed) {
+			return this.__array.pop();
+		} else {
+			return null;
+		}
+	}
+	,push: function(x) {
+		if(!this.fixed) {
+			return this.__array.push(x);
+		} else {
+			return this.__array.length;
+		}
+	}
+	,removeAt: function(index) {
+		if(!this.fixed || index < this.__array.length) {
+			return this.__array.splice(index,1)[0];
+		}
+		return null;
+	}
+	,reverse: function() {
+		this.__array.reverse();
+		return this;
+	}
+	,set: function(index,value) {
+		if(!this.fixed || index < this.__array.length) {
+			return this.__array[index] = value;
+		} else {
+			return value;
+		}
+	}
+	,shift: function() {
+		if(!this.fixed) {
+			return this.__array.shift();
+		} else {
+			return null;
+		}
+	}
+	,slice: function(startIndex,endIndex) {
+		if(startIndex == null) {
+			startIndex = 0;
+		}
+		if(endIndex == null) {
+			endIndex = 16777215;
+		}
+		return new openfl__$Vector_ObjectVector(0,false,this.__array.slice(startIndex,endIndex));
+	}
+	,sort: function(f) {
+		this.__array.sort(f);
+	}
+	,splice: function(pos,len) {
+		return new openfl__$Vector_ObjectVector(0,false,this.__array.splice(pos,len));
+	}
+	,toJSON: function() {
+		return this.__array;
+	}
+	,toString: function() {
+		if(this.__array != null) {
+			return this.__array.toString();
+		} else {
+			return null;
+		}
+	}
+	,unshift: function(x) {
+		if(!this.fixed) {
+			this.__array.unshift(x);
+		}
+	}
+	,get_length: function() {
+		return this.__array.length;
+	}
+	,set_length: function(value) {
+		if(!this.fixed) {
+			var currentLength = this.__array.length;
+			if(value < 0) {
+				value = 0;
+			}
+			if(value > currentLength) {
+				var _g = currentLength;
+				var _g1 = value;
+				while(_g < _g1) {
+					var i = _g++;
+					this.__array.push(null);
+				}
+			} else {
+				while(this.__array.length > value) this.__array.pop();
+			}
+		}
+		return this.__array.length;
+	}
+	,__class__: openfl__$Vector_ObjectVector
 	,__properties__: {set_length:"set_length",get_length:"get_length"}
 };
 var openfl_display_Application = function() {
@@ -82011,6 +82413,51 @@ openfl_utils__$Dictionary_FloatMap.prototype = {
 	}
 	,__class__: openfl_utils__$Dictionary_FloatMap
 };
+var openfl_utils__$Dictionary_UtilsObjectMap = function() {
+	this.map = new haxe_ds_ObjectMap();
+};
+$hxClasses["openfl.utils._Dictionary.UtilsObjectMap"] = openfl_utils__$Dictionary_UtilsObjectMap;
+openfl_utils__$Dictionary_UtilsObjectMap.__name__ = "openfl.utils._Dictionary.UtilsObjectMap";
+openfl_utils__$Dictionary_UtilsObjectMap.__interfaces__ = [haxe_IMap];
+openfl_utils__$Dictionary_UtilsObjectMap.prototype = {
+	clear: function() {
+		this.map.h = { __keys__ : { }};
+	}
+	,copy: function() {
+		var copied = new openfl_utils__$Dictionary_UtilsObjectMap();
+		var key = this.keys();
+		while(key.hasNext()) {
+			var key1 = key.next();
+			copied.set(key1,this.get(key1));
+		}
+		return copied;
+	}
+	,exists: function(key) {
+		return this.map.h.__keys__[key.__id__] != null;
+	}
+	,get: function(key) {
+		return this.map.h[key.__id__];
+	}
+	,keyValueIterator: function() {
+		return new haxe_iterators_MapKeyValueIterator(this);
+	}
+	,keys: function() {
+		return this.map.keys();
+	}
+	,iterator: function() {
+		return this.map.iterator();
+	}
+	,remove: function(key) {
+		return this.map.remove(key);
+	}
+	,set: function(key,value) {
+		this.map.set(key,value);
+	}
+	,toString: function() {
+		return this.map.toString();
+	}
+	,__class__: openfl_utils__$Dictionary_UtilsObjectMap
+};
 var openfl_utils_Endian = {};
 openfl_utils_Endian.fromLimeEndian = function(value) {
 	switch(value._hx_index) {
@@ -84658,8 +85105,6 @@ openfl_display_Loader.__registerDefaultLoaders();
 openfl_display__$internal_CanvasGraphics.hitTestCanvas = js_Browser.get_supported() ? window.document.createElement("canvas") : null;
 openfl_display__$internal_CanvasGraphics.hitTestContext = js_Browser.get_supported() ? openfl_display__$internal_CanvasGraphics.hitTestCanvas.getContext("2d") : null;
 openfl_Vector.__meta__ = { statics : { toNullVector : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
-openfl__$Vector_IVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
-openfl__$Vector_ObjectVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { concat : { SuppressWarnings : ["checkstyle:Dynamic"]}, toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}, _ : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl_display_DisplayObject.__meta__ = { fields : { __cairo : { SuppressWarnings : ["checkstyle:Dynamic"]}, addEventListener : { SuppressWarnings : ["checkstyle:Dynamic"]}, removeEventListener : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl_display_DisplayObject.__broadcastEvents = new haxe_ds_StringMap();
 openfl_display_DisplayObject.__instanceCount = 0;
@@ -84677,6 +85122,10 @@ Xml.Comment = 3;
 Xml.DocType = 4;
 Xml.ProcessingInstruction = 5;
 Xml.Document = 6;
+extension_ads_AdsBase.kAdsLoadTimeout = parseFloat("1");
+extension_ads_AdsBase.kAdsLoadTimeoutError = parseFloat("1");
+extension_ads_AdsBase.kAdsFirstInterstitialDenyTime = parseFloat("60");
+extension_ads_AdsBase.kAdsInterstitialDenyTime = parseFloat("45");
 haxe_Serializer.USE_CACHE = false;
 haxe_Serializer.USE_ENUM_INDEX = false;
 haxe_Serializer.BASE64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%:";
@@ -86071,16 +86520,17 @@ motion_Actuate.targetLibraries = new haxe_ds_ObjectMap();
 motion_easing_Quad.easeIn = new motion_easing__$Quad_QuadEaseIn();
 motion_easing_Quad.easeInOut = new motion_easing__$Quad_QuadEaseInOut();
 motion_easing_Quad.easeOut = new motion_easing__$Quad_QuadEaseOut();
-openfl_utils__$Dictionary_UtilsObjectMap.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
 openfl_Lib.__lastTimerID = 0;
 openfl_Lib.__sentWarnings = new haxe_ds_StringMap();
 openfl_Lib.__timers = new haxe_ds_IntMap();
 openfl_Lib.__registeredClassAliases = new haxe_ds_StringMap();
 openfl_Lib.__registeredClasses = openfl_utils_Dictionary.toUtilsObjectMap(null);
+openfl__$Vector_IVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
 openfl__$Vector_BoolVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl__$Vector_FloatVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}, _ : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl__$Vector_FunctionVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl__$Vector_IntVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
+openfl__$Vector_ObjectVector.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, fields : { concat : { SuppressWarnings : ["checkstyle:Dynamic"]}, toJSON : { SuppressWarnings : ["checkstyle:Dynamic"]}, _ : { SuppressWarnings : ["checkstyle:Dynamic"]}}};
 openfl_display_Application.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
 openfl_geom_Rectangle.__pool = new lime_utils_ObjectPool(function() {
 	return new openfl_geom_Rectangle();
@@ -87000,6 +87450,7 @@ openfl_utils_CompressionAlgorithm.LZMA = 1;
 openfl_utils_CompressionAlgorithm.ZLIB = 2;
 openfl_utils__$Dictionary_ClassMap.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
 openfl_utils__$Dictionary_FloatMap.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
+openfl_utils__$Dictionary_UtilsObjectMap.__meta__ = { obj : { SuppressWarnings : ["checkstyle:FieldDocComment"]}};
 openfl_utils_Endian.BIG_ENDIAN = 0;
 openfl_utils_Endian.LITTLE_ENDIAN = 1;
 openfl_utils_Object.__meta__ = { statics : { iterator : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, __get : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, __set : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, __getArray : { SuppressWarnings : ["checkstyle:FieldDocComment"]}, __setArray : { SuppressWarnings : ["checkstyle:FieldDocComment"]}}};

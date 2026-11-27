@@ -1,0 +1,8 @@
+{
+    "workbench.colorTheme": "Default High Contrast",
+    "haxe.executable": "D:\\haxe\\haxe\\haxe.exe",
+    "lime.executable": "D:\\haxe\\haxe\\haxelib.exe run lime",
+    "debug.javascript.defaultRuntimeExecutable": {
+        "pwa-node": "node"
+    }
+}
